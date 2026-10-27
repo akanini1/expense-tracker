@@ -1,6 +1,6 @@
-# Expense Tracker - Installment 3: The Tracker Does Math 
+# Expense Tracker - Installment 4: The Tracker Makes Decisions
 # Author: Prince Diether M. Sampang
-# Adds subtotal, tax, grand total, and budget calculations.
+# Adds size messages, a two-big warning, and a budget verdict.
 
 print("=" * 40)
 print("\t\tEXPENSE TRACKER")
@@ -16,14 +16,34 @@ print("\t[4] Exit\t\t(coming soon)")
 name = input("\nWhat's your name? ")
 print(f"Welcome, {name}! Let's log two expenses.")
 
-subtotal = 0 
+subtotal = 0
 
 item1 = input("\nFirst expense? ")
 amount1 = float(input("Amount? "))
 subtotal += amount1
+if amount1 > 200:
+    print("  Huge expense - are you sure?")
+elif amount1 > 100:
+    print("  Big expense.")
+elif amount1 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
 subtotal += amount2
+if amount2 > 200:
+    print("  Huge expense - are you sure?")
+elif amount2 > 100:
+    print("  Big expense.")
+elif amount2 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
+if amount1 > 100 and amount2 > 100:
+    print("  Two big expenses in a row - slow down!")
 
 tax_percent = float(input("Tax rate %? "))
 budget = float(input("Your budget? "))
@@ -34,7 +54,6 @@ total = subtotal + tax
 over_budget = total > budget
 left = budget - total
 
-
 print()
 print("-" * 40)
 print("SUMMARY")
@@ -44,7 +63,11 @@ print(f"Subtotal:\t${subtotal}")
 print(f"Average:\t${average}")
 print(f"Tax ({tax_percent}%):\t${tax}")
 print(f"Grand total:\t${total}")
-print(f"Over budget?\t{over_budget}")
-print(f"Left in budget:\t${left}")
+if over_budget:
+    print(f"Over budget by ${total - budget}!")
+elif left < budget * 0.10:
+    print(f"Careful: only ${left} left.")
+else:
+    print(f"Within budget. ${left} left.")
 print("-" * 40)
-print("Made by: Prince Diether M. Sampang | Installment 3")
+print("Made by: Prince Diether M. Sampang | Installment 4")
